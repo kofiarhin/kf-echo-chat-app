@@ -1,22 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
 
 const getMessages = async (conversationId) => {
-  try {
-    const url = `/api/messages/${conversationId}`;
-    const res = await fetch(url);
-    if (!res.ok) {
-      throw new Error("there was a problem getting messages");
-    }
-    return res.json();
-  } catch (error) {
-    return { error: error.message };
+  const res = await fetch(`/api/messages/${conversationId}`);
+  if (!res.ok) {
+    throw new Error("There was a problem getting messages");
   }
+  return res.json();
 };
 
 const useMessages = (conversationId) => {
   return useQuery({
-    queryFn: () => getMessages(conversationId),
     queryKey: ["conversations", conversationId],
+    queryFn: () => getMessages(conversationId),
     enabled: !!conversationId,
   });
 };
