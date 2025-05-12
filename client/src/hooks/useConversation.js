@@ -8,7 +8,7 @@ const useConversations = (userId) => {
   };
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ["Conversations", userId],
+    queryKey: ["conversations", userId],
     queryFn: getConversations,
     enabled: !!userId, // only run query if userId is truthy
   });
