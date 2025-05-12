@@ -6,9 +6,17 @@ import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import Chat from "./Pages/Chat/Chat";
 import Profile from "./Pages/Profile/Profile";
 import Users from "./Pages/Users/Users";
+import { useEffect } from "react";
+import useSocket from "./hooks/useSocket";
 
 // app
 const App = () => {
+  const { socket } = useSocket();
+  useEffect(() => {
+    socket?.on("message", (data) => {
+      console.log("refresh data");
+    });
+  }, [socket]);
   return (
     <>
       <Router>

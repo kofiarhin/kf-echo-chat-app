@@ -14,7 +14,6 @@ const getMessages = async (conversationId) => {
 };
 
 const useMessages = (conversationId) => {
-  console.log(conversationId);
   return useQuery({
     queryFn: () => getMessages(conversationId),
     queryKey: ["conversations", conversationId],
