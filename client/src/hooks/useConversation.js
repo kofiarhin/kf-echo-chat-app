@@ -2,19 +2,18 @@ import { useQuery } from "@tanstack/react-query";
 
 const useConversations = (userId) => {
   const getConversations = async () => {
-    try {
-      const res = await fetch(`/api/conversations/${userId}`);
-      return await res.json();
-    } catch (error) {
-      return { error: error.message };
-    }
+    const res = await fetch(`/api/conversations/${userId}`);
+    if (!res.ok) throw new Error("Failed to fetch conversations");
+    return res.json();
   };
 
   const { data, isLoading, error } = useQuery({
+    queryKey: ["Conversations", userId],
     queryFn: getConversations,
-    querykey: ["Conversations"],
+    enabled: !!userId, // only run query if userId is truthy
   });
-  return { data };
+
+  return { data, isLoading, error };
 };
 
 export default useConversations;
