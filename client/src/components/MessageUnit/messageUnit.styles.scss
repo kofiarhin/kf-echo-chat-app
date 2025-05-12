@@ -1,0 +1,14 @@
+.message-unit {
+  padding: 0.5rem 0rem;
+  padding-left: 1rem;
+  border-radius: 0px 10px 10px 10px;
+  width: 300px;
+  margin-bottom: 1rem;
+  &.received {
+    background-color: rgb(128, 58, 60);
+  }
+  &.sent {
+    background-color: rgb(46, 168, 77);
+    cursor: pointer;
+  }
+}
